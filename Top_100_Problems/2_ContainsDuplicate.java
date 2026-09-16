@@ -26,7 +26,7 @@ class Solution {
 
 //Optimal 
 /*
-    Idea : Frequency HashMap
+    Idea : Frequency HashMap  , Simply we can use HashSet also
          -> if map already contains the key, return true
     T.C : O(n) 
     S.C : O(n)
