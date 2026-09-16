@@ -27,8 +27,7 @@ class Solution {
 //Optimal 
 /*
     Idea : Frequency HashMap
-        -> 1st loop : Create a frequencyHashMap
-        -> 2nd loop : if map already contains the key, return true
+         -> if map already contains the key, return true
     T.C : O(n) 
     S.C : O(n)
 */
