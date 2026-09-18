@@ -1,0 +1,86 @@
+/*
+  Problem : Encode and Decode Strings (GfG)
+
+  Design an algorithm to encode a list of strings into a single string,
+  and decode the encoded string back to the original list.
+
+*/
+
+
+// Optimal
+/*
+    Idea : Length Prefix Encoding
+        -> Store the length of each string before the actual string.
+
+        Format:
+            length + "/:" + string
+
+        Example:
+            ["hello", "java"]
+
+            Encode:
+            5/:hello4/:java
+
+        -> During decoding:
+            1. Find the "/:" delimiter.
+            2. Extract the length before "/:".
+            3. Read exactly 'length' characters after "/:".
+            4. Move to the next encoded string.
+
+        -> Since the length tells us exactly how many characters
+           belong to the current string, the string can contain
+           any character, including "/:".
+
+    T.C : O(N)
+    S.C : O(N)
+
+        N -> Total number of characters in all strings
+
+    Key Idea:
+        Length → Delimiter → Read exact number of characters
+*/
+
+class Solution {
+
+    public String encode(String arr[]) {
+        // write your logic to encode the strings
+        StringBuilder res = new StringBuilder();
+        for(String word:arr){
+            int len = word.length();
+            
+            res.append(len + "/:" + word);
+        }
+        
+        // System.out.println(res);
+        
+        return res.toString();
+    }
+
+    public ArrayList<String> decode(String s) {
+        // write your logic to decode the string
+        int i=0,n=s.length();
+        ArrayList<String> res = new ArrayList<>();
+        
+        while(i<n){
+            int j = i;
+
+            // Find the "/:" delimiter
+            while(!(s.charAt(j) == '/' && s.charAt(j + 1) == ':')) {
+                j++;
+            }
+
+            // Extract length
+            int len = Integer.parseInt(s.substring(i, j));
+
+            // Extract actual string
+            String word = s.substring(j + 2, j + 2 + len);
+
+            res.add(word);
+
+            // Move to the next encoded string
+            i = j + 2 + len;
+            
+        }
+        return res;
+    }
+}
